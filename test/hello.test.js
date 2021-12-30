@@ -8,6 +8,6 @@ describe('POST /hello', function () {
       .get('/hello')
 
     expect(response.status).to.eql(200)
-    expect(response.text).to.eql('Hello')
+    expect(response.text).to.eql('Hello World')
   })
 })
