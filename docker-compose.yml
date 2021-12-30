@@ -1,0 +1,19 @@
+version: '3'
+services:
+  api:
+    image: sample-auth-app
+    build:
+    networks:
+      - backend
+    ports:
+      - '4001:4001'
+
+  web-cli:
+    image: sample-auth-app
+    networks:
+      - backend
+    command: sh
+
+networks:
+  backend:
+    driver: bridge
