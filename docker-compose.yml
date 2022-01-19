@@ -2,11 +2,13 @@ version: '3'
 services:
   api:
     image: sample-auth-app
-    build:
+    build: .
     networks:
       - backend
     ports:
       - '4001:4001'
+    environment:
+      MONGO_URI: mongodb://127.0.0.1:27017
 
   web-cli:
     image: sample-auth-app
