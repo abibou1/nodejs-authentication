@@ -7,8 +7,18 @@ services:
       - backend
     ports:
       - '4001:4001'
-    environment:
-      MONGO_URI: mongodb://127.0.0.1:27017
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo
+    restart: always
+    container_name: users
+    volumes:
+      - ./data-node:/data/db
+    ports:
+      - 27017:27017
+    command: mongodb --noauth --smallfiles
 
   web-cli:
     image: sample-auth-app
