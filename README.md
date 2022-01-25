@@ -10,7 +10,7 @@ You may also need to install Postman to run the APIs.
 
 # Install
 
-  $ git clone https://github.com/abibou1/nodejs-authentication.git\
+  $ git clone https://github.com/abibou1/nodejs-authentication.git \
   $ cd nodejs-authentication\
   $ npm install
 
@@ -19,16 +19,16 @@ You may also need to install Postman to run the APIs.
 You will an .env file where you set goblal variables: API_PORT and MONGO_URI.
 
 For example:
-  API_PORT=8080
-  MONGO_URI=mongodb://127.0.0.1:27017
+  API_PORT=8080 \
+  MONGO_URI=mongodb://127.0.0.1:27017 \
 
 # Running the project
-  $ npm start
+  $ npm start\
   or
-  $ npm run dev
+  $ npm run dev\
 
 # API
-More information about the apis here:
+More information about the apis here:\
   https://app.swaggerhub.com/apis/abibou1/authAPIS/1.0.0#/
 
 # Running tests
