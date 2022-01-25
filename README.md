@@ -16,16 +16,16 @@ You may also need to install Postman to run the APIs.
 
 # Setting
 
-You will an .env file where you set goblal variables: API_PORT and MONGO_URI.
+You will an .env file where you set global variables: API_PORT and MONGO_URI.
 
-For example:
+For example:\
   API_PORT=8080 \
-  MONGO_URI=mongodb://127.0.0.1:27017 \
+  MONGO_URI=mongodb://127.0.0.1:27017
 
 # Running the project
   $ npm start\
-  or
-  $ npm run dev\
+  or\
+  $ npm run dev
 
 # API
 More information about the apis here:\
