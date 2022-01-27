@@ -9,6 +9,9 @@
         "lint": "eslint . --ext .js",
         "test": "npm run lint & nyc mocha --exit"
     },
+    "pre-commit": [
+      "lint"
+    ],
     "keywords": [],
     "author": "",
     "license": "ISC",
@@ -36,6 +39,7 @@
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-promise": "^5.2.0",
         "nodemon": "^2.0.15",
-        "nyc": "^15.1.0"
+        "nyc": "^15.1.0",
+        "pre-commit": "^1.2.2"
     }
 }
