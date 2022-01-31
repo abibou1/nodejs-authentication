@@ -1,32 +1,41 @@
 version: '3'
 services:
-  api:
-    image: sample-auth-app
-    # restart: always
-    build: .
+  workspace:
+    image: node:14.18.3-buster
+    container_name: workspace
+    command: tail -f /dev/null
     networks:
       - backend
-    ports:
-      - '4001:4001'
-    depends_on:
-      - mongo
-
-  mongo:
-    image: mongo
-    # # restart: always
-    # container_name: mongodb
-    # volumes:
-    #   - ./data-node:/data/db
+    restart: unless-stopped
+    volumes:
+      - ${WORK_DIR}:/node/
+  node_workspace:
+    image: nodeimage
+    container_name: node
+    command: tail -f /dev/null
+    build:
+      context: .
+      dockerfile: node.dockerfile
+    networks:
+      - backend
+    restart: unless-stopped
+    volumes:
+      - ${WORK_DIR}:/node/
+  mongodb:
+    image: mongo:4.4.12
+    command: --replSet "rs0" --bind_ip_all
+    container_name: mongodb
+    restart: unless-stopped
     ports:
       - 27017:27017
-    command: mongod --noauth #--smallfiles
-
-  # web-cli:
-  #   image: sample-auth-app
-  #   networks:
-  #     - backend
-  #   command: sh
-
+    networks: 
+      - backend
+  configure-mongodb:
+    image: mongo:4.4.12
+    entrypoint: ["bash"]
+    command: ["-c", "while [ \"`echo 'db.stats().ok' | mongo --host mongodb --quiet`\" != 1 ]; do sleep 1; done && echo 'rs.initiate({ _id : \"rs0\", members: [ { _id: 0, host: \"mongodb:27017\" } ] })' | mongo --host mongodb --quiet ; sleep 2; echo 'admin = db.getSiblingDB(\"admin\"); admin.createUser({ user: \"admin\", pwd: \"adminPWD\", roles: [ { role: \"userAdminAnyDatabase\", db: \"admin\" } ] })' | mongo --host mongodb ; echo 'admin = db.getSiblingDB(\"admin\"); admin.createUser({ user: \"testU\", pwd: \"testPWD\", roles: [ { role: \"readWrite\", db: \"test\" } ] })' | mongo --host mongodb --quiet -u admin -p testPWD --authenticationDatabase=admin"]
+    networks:
+      - backend
 networks:
   backend:
     driver: bridge

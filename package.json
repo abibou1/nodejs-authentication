@@ -10,7 +10,7 @@
         "test": "npm run lint & nyc mocha --exit"
     },
     "pre-commit": [
-      "lint"
+        "lint"
     ],
     "keywords": [],
     "author": "",
