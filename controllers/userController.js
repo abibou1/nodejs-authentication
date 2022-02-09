@@ -18,7 +18,6 @@ const register = async (req, res) => {
       const errors = {}
       if (firstName.length < nameMinSize) {
         errors.firstNameError = 'FirstName should contain 2 to 20 characters'
-        // const firstNameError = 'FirstName should contain 2 to 20 characters'
       }
 
       if (lastName.length < nameMinSize) {
@@ -32,15 +31,11 @@ const register = async (req, res) => {
       return res.status(400).json(errors)
     }
 
-    // if (password.length < 6) {
-    //   return res.status(400).json({ error: 'Password must be at least 6 characters' })
-    // }
+    const existingUser = await User.findOne({ email: emailLowerCase })
 
-    // const existingUser = await User.findOne({ email: emailLowerCase })
-
-    // if (existingUser) {
-    //   return res.status(409).json({ error: 'User Already Exist. Please Login' })
-    // }
+    if (existingUser) {
+      return res.status(409).json({ error: 'User Already Exist. Please Login' })
+    }
 
     const encryptedPassword = await bcrypt.hash(password, 10)
 
