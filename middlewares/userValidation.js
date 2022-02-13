@@ -1,5 +1,7 @@
 
-const validateUser = (req, res, next) => {
+// const { check } = require('express-validator')
+
+const validate = (req, res, next) => {
   const { firstName, lastName, email, password } = req.body
 
   if (!firstName || !lastName || !email || !password) {
@@ -28,4 +30,4 @@ const validateUser = (req, res, next) => {
   return next()
 }
 
-module.exports = validateUser
+module.exports = validate
