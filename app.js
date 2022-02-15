@@ -1,4 +1,5 @@
 const express = require('express')
+// const expressValidator = require('express-validator')
 const helloController = require('./controllers/helloController')
 const userController = require('./controllers/userController')
 const userValidation = require('./middlewares/userValidation')
@@ -12,6 +13,7 @@ const router = require('./routes/helloRoute')
 
 app.use(express.json())
 app.use('/', router)
+// app.use(expressValidator)
 
 app.get('/hello', helloController.helloWorld)
 app.post(apiUrl + 'register', userValidation.validate, userController.register)
