@@ -1,11 +1,23 @@
 
-const { body } = require('express-validator')
+const { body, validationResult } = require('express-validator')
 
-const validate = (req, res, next) => {
+const userValidationRules = () => {
   return [
     body('firstName', 'firstName doesn\'t exists').exists(),
     body('lastName', 'lastName doesn\'t exists').exists()
   ]
+}
+const validate = (req, res, next) => {
+  const errors = validationResult(req)
+
+  if (errors.isEmpty()) {
+    return next()
+  }
+
+  const extractedErrors = []
+  errors.array().map(err => extractedErrors.push({ [err.param]: err.msg }))
+
+  return res.status(422).json({ errors: extractedErrors })
 }
 
 // const validate = (req, res, next) => {
@@ -38,6 +50,7 @@ const validate = (req, res, next) => {
 // }
 
 module.exports = {
+  userValidationRules,
   validate
 }
 

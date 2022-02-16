@@ -16,6 +16,6 @@ app.use('/', router)
 // app.use(expressValidator)
 
 app.get('/hello', helloController.helloWorld)
-app.post(apiUrl + 'register', userValidation.validate, userController.register)
+app.post(apiUrl + 'register', userValidation.userValidationRules(), userValidation.validate, userController.register)
 
 module.exports = app
