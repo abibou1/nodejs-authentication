@@ -13,7 +13,6 @@ const router = require('./routes/helloRoute')
 
 app.use(express.json())
 app.use('/', router)
-// app.use(expressValidator)
 
 app.get('/hello', helloController.helloWorld)
 app.post(apiUrl + 'register', userValidation.userValidationRules(), userValidation.validate, userController.register)
