@@ -4,8 +4,11 @@ const app = require('./../app')
 const User = require('../model/userModel')
 
 after('Deleting all users', async function () {
-  console.log('delete all users...')
-  const ok = await User.deleteMany({})
+  const email = 'test@test.com'
+  // console.log('delete all users...')
+  console.log('deleting user with email: ' + email)
+  // const ok = await User.deleteMany({})
+  const ok = await User.deleteOne({ email })
   console.log(ok.deletedCount, ' user(s) deleted!')
 })
 
