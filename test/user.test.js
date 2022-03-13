@@ -12,6 +12,7 @@ describe('Register', function () {
       .send({ firstName: 'test', lastName: 'test', email: email, password: 'Password1#' })
 
     expect(response.status).to.eql(201)
+
     // eslint-disable-next-line no-unused-expressions
     expect(response.body.token).to.not.be.empty
 
