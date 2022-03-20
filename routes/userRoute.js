@@ -8,5 +8,6 @@ router.use(bodyParser.json())
 const apiUrl = '/api/'
 
 router.post(apiUrl + 'register', userValidation.userValidationRules(), userValidation.validate, userController.register)
+router.post(apiUrl + 'login', userController.login)
 
 module.exports = router
